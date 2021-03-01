@@ -9,7 +9,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    var lightIsOn = true
+    var currectColor = 0
+    var colors: [UIColor] = [.white, .lightGray, .gray, .darkGray, .black]
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +23,14 @@ class ViewController: UIViewController {
     
     /// Changes view background color
     fileprivate func updateUI() {
-        view.backgroundColor = lightIsOn ? .white : .black
+        if currectColor >= colors.count {
+            currectColor = 0
+        }
+        view.backgroundColor = colors[currectColor]
     }
     
     @IBAction func buttonPressed(_ sender: UIButton) {
-        lightIsOn.toggle()
+        currectColor += 1
         updateUI()
     }
     
