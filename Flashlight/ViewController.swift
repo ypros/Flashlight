@@ -23,6 +23,11 @@ class ViewController: UIViewController {
         return true
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        currectColor += 1
+        updateUI()
+    }
+    
     /// Changes view background color
     fileprivate func updateUI() {
         if currectColor >= colors.endIndex {
@@ -33,15 +38,9 @@ class ViewController: UIViewController {
         toggleTorch(currectColor)
     }
     
-    @IBAction func buttonPressed(_ sender: UIButton) {
-        currectColor += 1
-        updateUI()
-    }
-    
-    
     /// Turns torch On or Off by the light level
     /// - Parameter level: the brightness level of the torch
-    func toggleTorch(_ level: Int) {
+    fileprivate func toggleTorch(_ level: Int) {
         guard let device = AVCaptureDevice.default(for: AVMediaType.video) else { return }
         guard device.hasTorch else { print("Torch isn't available"); return }
 
